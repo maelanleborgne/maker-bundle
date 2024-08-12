@@ -82,6 +82,54 @@ class MakeResetPasswordTest extends MakerTestCase
             }),
         ];
 
+        yield 'it_generates_tests' => [$this->createMakerTest()
+            // Needed to assertEmails && NotCompromisedPassword
+            ->addExtraDependencies('symfony/mailer', 'symfony/http-client')
+            // @legacy - drop skipped versions when PHP 8.1 is no longer supported.
+            ->setSkippedPhpVersions(80100, 80109)
+            ->preRun(function (MakerTestRunner $runner) {
+                $runner->copy(
+                    'make-reset-password/src/Controller/FixtureController.php',
+                    'src/Controller/FixtureController.php'
+                );
+            })
+            ->run(function (MakerTestRunner $runner) {
+                $this->makeUser($runner);
+
+                $output = $runner->runMaker([
+                    'app_home',
+                    'jr@rushlow.dev',
+                    'SymfonyCasts',
+                    'y',
+                ]);
+
+                $this->assertStringContainsString('Success', $output);
+
+                $generatedFiles = [
+                    'tests/ResetPasswordControllerTest.php',
+                ];
+
+                foreach ($generatedFiles as $file) {
+                    $this->assertFileExists($runner->getPath($file));
+                }
+
+                $runner->writeFile(
+                    'config/packages/mailer.yaml',
+                    Yaml::dump(['framework' => [
+                        'mailer' => ['dsn' => 'null://null'],
+                    ]])
+                );
+
+                $runner->copy(
+                    'make-reset-password/tests/it_generates_with_normal_setup.php',
+                    'tests/ResetPasswordFunctionalTest.php'
+                );
+
+                $runner->configureDatabase();
+                $runner->runTests();
+            }),
+        ];
+
         yield 'it_generates_with_uuid' => [$this->createMakerTest()
             ->setSkippedPhpVersions(80100, 80109)
             ->addExtraDependencies('symfony/uid')
@@ -304,8 +352,8 @@ class MakeResetPasswordTest extends MakerTestCase
                 $contentResetPasswordController = file_get_contents($runner->getPath('src/Controller/ResetPasswordController.php'));
                 $this->assertStringContainsString('$form->get(\'emailAddress\')->getData()', $contentResetPasswordController);
                 $this->assertStringContainsString('\'emailAddress\' => $emailFormData,', $contentResetPasswordController);
-                $this->assertStringContainsString('$user->setMyPassword($encodedPassword);', $contentResetPasswordController);
-                $this->assertStringContainsString('->to($user->getEmailAddress())', $contentResetPasswordController);
+                $this->assertStringContainsString('$user->setMyPassword($passwordHasher->hashPassword($user, $plainPassword));', $contentResetPasswordController);
+                $this->assertStringContainsString('->to((string) $user->getEmailAddress())', $contentResetPasswordController);
 
                 // check ResetPasswordRequest
                 $contentResetPasswordRequest = file_get_contents($runner->getPath('src/Entity/ResetPasswordRequest.php'));

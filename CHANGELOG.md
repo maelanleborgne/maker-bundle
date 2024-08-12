@@ -1,5 +1,57 @@
 # Changelog
 
+## [v1.60.0](https://github.com/symfony/maker-bundle/releases/tag/v1.60.0)
+
+*June 10th, 2024*
+
+### Feature
+
+- [#1534](https://github.com/symfony/maker-bundle/pull/1534) [make:entity] add enum support - *@loicsapone*
+- [#1543](https://github.com/symfony/maker-bundle/pull/1543) [dx] make it easier to use tooling for devs - *@jrushlow*
+- [#1544](https://github.com/symfony/maker-bundle/pull/1544) [make:webhook] phpstan types and single quotes - *@seb-jean*
+- [#1546](https://github.com/symfony/maker-bundle/pull/1546) [make:message] phpstan types - *@seb-jean*
+- [#1545](https://github.com/symfony/maker-bundle/pull/1545) 1545 [make:crud] use getString() instead of get() for csrf token - *@seb-jean*
+- [#1568](https://github.com/symfony/maker-bundle/pull/1568) [make:schedule] Add transport name for attribute - *@NicolasJourdan* 
+- [#1574](https://github.com/symfony/maker-bundle/pull/1547) [make:validator] phpstan types - *@seb-jean*
+
+### Bug
+
+- [#1496](https://github.com/symfony/maker-bundle/pull/1496) [make:entity] confirm to allow non-ascii char's in entity names - *@Fan2Shrek*
+- [#1533](https://github.com/symfony/maker-bundle/pull/1533) make:security:form-login] fix remember me label - *@jrushlow*
+- [#1535](https://github.com/symfony/maker-bundle/pull/1535) [make:entity] Update ux-turbo package name to have proper suggestion - *@nfragnet*
+- [#1559](https://github.com/symfony/maker-bundle/pull/1559) [make:entity] fix indentation in broadcast_twig_template.tpl.php - *@seb-jean*
+- [#1569](https://github.com/symfony/maker-bundle/pull/1569) Fix generated twig file location - *@IndraGunawan*
+
+## [v1.59.1](https://github.com/symfony/maker-bundle/releases/tag/v1.59.1)
+
+*May 5th, 2024*
+
+### Bug
+
+- [#1532](https://github.com/symfony/maker-bundle/pull/1532) [make:auth] only fire deprecation when command is called - *@eltharin*
+
+## [v1.59.0](https://github.com/symfony/maker-bundle/releases/tag/v1.59.0)
+
+*April 27th, 2024*
+
+### Feature
+
+- [#1523](https://github.com/symfony/maker-bundle/pull/1523) [make:auth] deprecate command - *@jrushlow*
+- [#1522](https://github.com/symfony/maker-bundle/pull/1522) [make:security:custom] create a custom authenticator - *@jrushlow*
+- [#1521](https://github.com/symfony/maker-bundle/pull/1521) [make:reset-password] improve types for static analysis in userland - *@jrushlow*
+- [#1520](https://github.com/symfony/maker-bundle/pull/1520) [make:entity] Simplify repository PHPDoc removes method annotations - *@lyrixx*
+- [#1519](https://github.com/symfony/maker-bundle/pull/1519) [make:registration] use "User" type in `EmailVerifier::class` - *@jrushlow*
+- [#1518](https://github.com/symfony/maker-bundle/pull/1518) [make:registration] add `bool` type to User::isVerified - *@jrushlow*
+- [#1515](https://github.com/symfony/maker-bundle/pull/1515) [make:security:form-login] add ability to generate tests - *@jrushlow*
+- [#1512](https://github.com/symfony/maker-bundle/pull/1512) [make:webhook] Rephrase comments to be more explicit + minor improvement of generated code - *@maelanleborgne*
+- [#1511](https://github.com/symfony/maker-bundle/pull/1511) [make:entity] helper message with two classes having the same name under different namespaces - *@jeromegxj*
+- [#1497](https://github.com/symfony/maker-bundle/pull/1497) [make:*] add ability to generate tests - *@jrushlow*
+
+### Bug
+
+- [#1525](https://github.com/symfony/maker-bundle/pull/1525) [make:serializer:encoder] fix interface signature mismatch in template - *@jrushlow*
+- [#1516](https://github.com/symfony/maker-bundle/pull/1516) [common] add missing class header - *@jrushlow*
+
 ## [v1.58.0](https://github.com/symfony/maker-bundle/releases/tag/v1.58.0)
 
 *April 6th, 2024*
